@@ -5,57 +5,101 @@ queue()
    .defer(d3.json, "/projecttwo/lifeexpectancy")
    .await(makeGraphs);
 
-function makeGraphs(error, lifeexpectancyproject) {
+function makeGraphs(error, lifeJSON) {
 
    //Create a Crossfilter instance
+    var lifeexpectancyproject = lifeJSON;
+    var dateFormat = d3.time.format("%Y-%m-%d");
+    lifeexpectancyproject.forEach(function (d) {
+        d["year"] = dateFormat.parse(d["year"]+"-1-1");
+        d["year"].setDate(1);
+    });
    var ndx = crossfilter(lifeexpectancyproject);
    var all = ndx.groupAll();
 
    //Define Dimensions
    var countryPie = ndx.dimension(function (d) {
        return d["country"];
-
-   });
-
-   var dateBar = ndx.dimension(function (d) {
-      return d["year"];
    });
 
    var totalCountries = ndx.dimension(function (d) {
-      return d["country_code"];
+       return d["country"];
+   });
+   //
+   var genderBar = ndx.dimension(function (d) {
+       return d["year"];
    });
 
-   var genderBarM = ndx.dimension(function (d) {
-      return d["male"];
-   });
+  // var avleGraph = ndx.dimension(function (d) {
+    //   return d["year"];
+   //});
 
-   var genderBarF = ndx.dimension(function (d) {
-      return d["female"];
-   });
+    function reduceAdd(p, v) {
+        ++p.count;
+        p.total += (v["male"] + v["female"]) / 2;
+        p.average = p.total / p.count;
+        return p;
+    }
 
-   //Calculate metrics
-   var numProjectsByCountry = countryPie.group();
-   var numProjectsByDate = dateBar.group();
-   var numProjectsByGenderM = genderBarM.group();
-   var numProjectsBytotalCountries = totalCountries.group();
+    function reduceRemove(p, v) {
+        --p.count;
+        p.total -= (v["male"] + v["female"]) / 2;
+        p.average = p.total / p.count;
+        return p;
+    }
 
-   var all = ndx.groupAll();
+    function reduceInitial() {
+        return {count: 0, total: 0, average: 0};
+    }
 
-    var minDate = genderBarM.bottom(1)[0]["male"];
-    var minDate = genderBarF.bottom(1)[0]["female"];
-    var maxDate = totalCountries.top(1)[0]["country_code"]
+    function reduceAddM(p, v) {
+        ++p.count;
+        p.total += v["male"];
+        p.average = p.total / p.count;
+        return p;
+    }
+
+    function reduceRemoveM(p, v) {
+        --p.count;
+        p.total -= v["male"];
+        p.average = p.total / p.count;
+        return p;
+    }
 
 
-   //Charts
+    function reduceAddF(p, v) {
+        ++p.count;
+        p.total += v["female"];
+        p.average = p.total / p.count;
+        return p;
+    }
+
+    function reduceRemoveF(p, v) {
+        --p.count;
+        p.total -= v["female"];
+        p.average = p.total / p.count;
+        return p;
+    }
+
+    var numProjectsByCountry = countryPie.group().reduce(reduceAdd, reduceRemove, reduceInitial);
+
+   var numProjectsByGenderM = genderBar.group().reduce(reduceAddM, reduceRemoveM, reduceInitial);
+
+   var numProjectsByGenderF = genderBar.group().reduce(reduceAddF, reduceRemoveF, reduceInitial);
+
+
+   var countryGroup = totalCountries.group();
+
+   // //Charts
 
    var countryPieChart = dc.pieChart("#country-chart");
-   var genderRowChart = dc.rowChart("#gender-chart");
-   var totalCountriesChart = dc.numberDisplay ("#number-countries");
-   var dateBarChart = dc.barChart("#date-chart")
+   var genderCompositeChart = dc.compositeChart("#gender-chart");
+   //var AvleBarGraph = dc.barGraph("#bar-graph")
 
  selectField = dc.selectMenu('#countries-select')
        .dimension(totalCountries)
-       .group(numProjectsBytotalCountries);
+       .group(countryGroup);
+
 
    countryPieChart
        .height(220)
@@ -63,33 +107,33 @@ function makeGraphs(error, lifeexpectancyproject) {
        .innerRadius(40)
        .transitionDuration(1500)
        .dimension(countryPie)
-       .group(numProjectsByCountry);
+       .group(numProjectsByCountry)
+       .valueAccessor(function(p) { return p.value.count > 0 ? p.value.total / p.value.count : 0;
+       });
 
-   genderRowChart
-       .width(300)
-       .height(250)
-       .dimension(genderBarM)
-       .group(numProjectsByGenderM)
-       .xAxis().ticks(4);
-
-   totalCountriesChart
-       .formatNumber(d3.format("d"))
-       .valueAccessor(function (d) {
-           return d;
-       })
-       .group(all);
-
-   dateBarChart
+   genderCompositeChart
        .width(800)
-       .height(200)
-       .margins({top: 10, right: 50, bottom: 30, left: 50})
-       .dimension(dateBar)
-       .group(numProjectsByDate)
+       .height(400)
+       .dimension(genderBar)
+       .group(numProjectsByGenderF)
        .transitionDuration(500)
-       .x(d3.time.scale().domain([minDate, maxDate]))
-       .elasticY(true)
+       .x(d3.time.scale().domain([new Date("1960-1-1"), new Date("2016-1-1")]))
        .xAxisLabel("Year")
-       .yAxis().ticks(4);
+       .y(d3.scale.linear().domain([30, 90]))
+       .yAxisLabel("Average Life Expectancy")
+       .compose([dc.lineChart(genderCompositeChart).group(numProjectsByGenderM).colors(['#aa00ff']).valueAccessor(function(kv) { return kv.value.average }),
+           dc.lineChart(genderCompositeChart).group(numProjectsByGenderF).colors(['#00aaff']).valueAccessor(function(kv) { return kv.value.average })]);
+
+   //AvleBarGraph
+
+      // .width(800)
+      // .dimension(avleGraph)
+      // .transitionDuration(500)
+       //.x(d3.time.scale().domain([new Date("1960-1-1"), new Date("2016-1-1")]))
+       //.xAxisLabel("Year")
+       //.compose([dc.lineChart(AvleGraph).group(numProjectsByGenderM).colors(['#aa00ff']).valueAccessor(function(kv) { return kv.value.average }),
+      //     dc.lineChart(AvleGraph).group(numProjectsByGenderF).colors(['#00aaff']).valueAccessor(function(kv) { return kv.value.average })]);
+
 
    dc.renderAll();
 }

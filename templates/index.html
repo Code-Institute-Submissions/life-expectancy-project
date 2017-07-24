@@ -17,10 +17,8 @@
       </div>
     </div>
   </div>
-  <div  id="outer" class="container-fluid">
+<div  id="outer" class="container">
     <div class="row">
-      <div class="col-sm-8">
-        <div class="row">
           <!-- Time Chart -->
           <div class="col-sm-12">
             <div class="chart-wrapper">
@@ -32,35 +30,41 @@
               </div>
             </div>
           </div>
+        </div>
           <!-- Time Chart -->
+          <div class="row">
 
           <!-- Resources -->
           <div class="col-sm-6">
             <div class="chart-wrapper">
               <div class="chart-title">
-                Resources Type
+               Countries
               </div>
               <div class="chart-stage">
-                <div id="resource-type-row-chart"></div>
+                <div id="country-chart"></div>
               </div>
             </div>
           </div>
+          </div>
           <!-- Resources -->
+          <div class="row">
 
           <!-- funding Pie -->
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="chart-wrapper">
               <div class="chart-title">
-                Funding Status
+                Chart by gender
               </div>
               <div class="chart-stage">
-                <div id="funding-chart"></div>
+                <div id="gender-chart"></div>
               </div>
             </div>
           </div>
           <!-- funding Pie -->
         </div>
       </div>
+    </div>
+
 
       <!-- Poverty -->
       <div class="col-sm-3">
@@ -79,10 +83,10 @@
       <div class="col-sm-6">
         <div class="chart-wrapper">
           <div class="chart-title">
-            Donation State
+            Country
           </div>
           <div class="chart-stage">
-            <div id="menu-select"></div>
+            <div id="countries-select"></div>
           </div>
         </div>
       </div>
@@ -123,7 +127,7 @@
     </div>
   </div>
   <hr>
-  <p class="small text-muted"> Data viz &#9829; from Code Institute</p>
+  <p class="small text-muted"> Data viz &#9829; from Claire Mitchell</p>
   <script src="{{ url_for ('static', filename='lib/js/jquery.min.js')}}"></script>
   <script src="{{ url_for ('static', filename='lib/js/bootstrap.min.js')}}"></script>
   <script src="{{ url_for ('static', filename='lib/js/crossfilter.js')}}"></script>
