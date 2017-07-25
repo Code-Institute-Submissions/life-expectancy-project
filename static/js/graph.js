@@ -30,9 +30,9 @@ function makeGraphs(error, lifeJSON) {
        return d["year"];
    });
 
-  // var avleGraph = ndx.dimension(function (d) {
-    //   return d["year"];
-   //});
+   var decadeBar = ndx.dimension(function (d) {
+       return d["country"];
+   });
 
     function reduceAdd(p, v) {
         ++p.count;
@@ -87,14 +87,16 @@ function makeGraphs(error, lifeJSON) {
 
    var numProjectsByGenderF = genderBar.group().reduce(reduceAddF, reduceRemoveF, reduceInitial);
 
+    var numProjectsByDecade = decadeBar.group().reduce(reduceAdd, reduceRemove, reduceInitial);
 
+    
    var countryGroup = totalCountries.group();
 
    // //Charts
 
    var countryPieChart = dc.pieChart("#country-chart");
    var genderCompositeChart = dc.compositeChart("#gender-chart");
-   //var AvleBarGraph = dc.barGraph("#bar-graph")
+   var decadeBarChart = dc.barChart("#decade-bar")
 
  selectField = dc.selectMenu('#countries-select')
        .dimension(totalCountries)
@@ -124,15 +126,18 @@ function makeGraphs(error, lifeJSON) {
        .compose([dc.lineChart(genderCompositeChart).group(numProjectsByGenderM).colors(['#aa00ff']).valueAccessor(function(kv) { return kv.value.average }),
            dc.lineChart(genderCompositeChart).group(numProjectsByGenderF).colors(['#00aaff']).valueAccessor(function(kv) { return kv.value.average })]);
 
-   //AvleBarGraph
-
-      // .width(800)
-      // .dimension(avleGraph)
-      // .transitionDuration(500)
-       //.x(d3.time.scale().domain([new Date("1960-1-1"), new Date("2016-1-1")]))
-       //.xAxisLabel("Year")
-       //.compose([dc.lineChart(AvleGraph).group(numProjectsByGenderM).colors(['#aa00ff']).valueAccessor(function(kv) { return kv.value.average }),
-      //     dc.lineChart(AvleGraph).group(numProjectsByGenderF).colors(['#00aaff']).valueAccessor(function(kv) { return kv.value.average })]);
+   decadeBarChart
+       .width(800)
+       .height(400)
+       .dimension(decadeBar)
+       .group(numProjectsByDecade)
+       .transitionDuration(500)
+       .x(d3.time.scale().domain([new Date("1960-1-1"), new Date("2016-1-1")]))
+       .xAxisLabel("Year")
+       .y(d3.scale.linear().domain([30, 90]))
+       .yAxisLabel("Average Life Expectancy")
+       .compose([dc.lineChart(decadeBarChart).group(numProjectsByDecade).colors(['#aa00ff']).valueAccessor(function(kv) { return kv.value.average }),
+           dc.lineChart(decadeBarChart).group(numProjectsByDecade).colors(['#00aaff']).valueAccessor(function(kv) { return kv.value.average })]);
 
 
    dc.renderAll();
