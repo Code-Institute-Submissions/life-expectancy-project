@@ -7,12 +7,17 @@ queue()
 
 function makeGraphs(error, lifeJSON) {
 
+    countries = [];
+
    //Create a Crossfilter instance
     var lifeexpectancyproject = lifeJSON;
     var dateFormat = d3.time.format("%Y-%m-%d");
     lifeexpectancyproject.forEach(function (d) {
         d["year"] = dateFormat.parse(d["year"]+"-1-1");
         d["year"].setDate(1);
+        if (countries.indexOf(d["country"]) === -1) {
+          countries.push(d["country"]);
+        }
     });
    var ndx = crossfilter(lifeexpectancyproject);
    var all = ndx.groupAll();
@@ -33,6 +38,10 @@ function makeGraphs(error, lifeJSON) {
    var decadeBar = ndx.dimension(function (d) {
        return d["country"];
    });
+
+   var genderPie = ndx.dimension(function (d) {
+       return d["gender"];
+    });
 
     function reduceAdd(p, v) {
         ++p.count;
@@ -81,22 +90,37 @@ function makeGraphs(error, lifeJSON) {
         return p;
     }
 
-    var numProjectsByCountry = countryPie.group().reduce(reduceAdd, reduceRemove, reduceInitial);
+    var numProjectsByCountry = countryPie.group().reduce(reduceAdd,
+reduceRemove, reduceInitial);
 
-   var numProjectsByGenderM = genderBar.group().reduce(reduceAddM, reduceRemoveM, reduceInitial);
+   var numProjectsByGenderM = genderBar.group().reduce(reduceAddM,
+reduceRemoveM, reduceInitial);
 
-   var numProjectsByGenderF = genderBar.group().reduce(reduceAddF, reduceRemoveF, reduceInitial);
+   var numProjectsByGenderF = genderBar.group().reduce(reduceAddF,
+reduceRemoveF, reduceInitial);
 
-    var numProjectsByDecade = decadeBar.group().reduce(reduceAdd, reduceRemove, reduceInitial);
+    var numProjectsByDecadeM = decadeBar.group().reduce(reduceAddM,
+reduceRemoveM, reduceInitial);
 
-    
+    var numProjectsByDecadeF = decadeBar.group().reduce(reduceAddF,
+reduceRemoveF, reduceInitial);
+
+ //   var numProjectsByGenderM = genderPie.group().reduce(reduceAddM,
+  // reduceRemoveM, reduceInitial);
+
+    //var numProjectsByGenderF = genderPie.group().reduce(reduceAddF,
+    //reduceRemoveM, reduceInitial);
+
+
+
    var countryGroup = totalCountries.group();
 
    // //Charts
 
    var countryPieChart = dc.pieChart("#country-chart");
    var genderCompositeChart = dc.compositeChart("#gender-chart");
-   var decadeBarChart = dc.barChart("#decade-bar")
+   var decadeBarChart = dc.compositeChart("#decade-bar")
+    var genderPieChart = dc.pieChart("#gender-piechart")
 
  selectField = dc.selectMenu('#countries-select')
        .dimension(totalCountries)
@@ -104,40 +128,66 @@ function makeGraphs(error, lifeJSON) {
 
 
    countryPieChart
-       .height(220)
-       .radius(90)
-       .innerRadius(40)
+       .width(600)
+       .height(400)
+       .radius(200)
+       .innerRadius(10)
        .transitionDuration(1500)
        .dimension(countryPie)
        .group(numProjectsByCountry)
-       .valueAccessor(function(p) { return p.value.count > 0 ? p.value.total / p.value.count : 0;
+       .valueAccessor(function(p) { return p.value.count > 0 ?
+p.value.total / p.value.count : 0;
        });
 
+   var colorScale = d3.scale.ordinal().range(['#ffffff', '#ffe6e6', '#ffcccc', '#ffb3b3', '#ff9999', '#ff8080', '#ff6666', '#ff4d4d', '#ff3333', '#ff1a1a', '#ff0000', '#e60000', '#cc0000'
+, '#b30000', '#990000', '#800000', '#660000', '#4d0000', '#330000', '#1a0000', '#000000']);
+    countryPieChart.colors(colorScale);
+
    genderCompositeChart
-       .width(800)
+       .width(600)
        .height(400)
        .dimension(genderBar)
        .group(numProjectsByGenderF)
        .transitionDuration(500)
-       .x(d3.time.scale().domain([new Date("1960-1-1"), new Date("2016-1-1")]))
+       .x(d3.time.scale().domain([new Date("1960-1-1"), new
+Date("2016-1-1")]))
        .xAxisLabel("Year")
        .y(d3.scale.linear().domain([30, 90]))
        .yAxisLabel("Average Life Expectancy")
-       .compose([dc.lineChart(genderCompositeChart).group(numProjectsByGenderM).colors(['#aa00ff']).valueAccessor(function(kv) { return kv.value.average }),
-           dc.lineChart(genderCompositeChart).group(numProjectsByGenderF).colors(['#00aaff']).valueAccessor(function(kv) { return kv.value.average })]);
+
+.compose([dc.lineChart(genderCompositeChart).group(numProjectsByGenderM).colors(['#ff4d4d']).valueAccessor(function(kv)
+{ return kv.value.average }),
+
+dc.lineChart(genderCompositeChart).group(numProjectsByGenderF).colors(['#990000']).valueAccessor(function(kv)
+{ return kv.value.average })]);
 
    decadeBarChart
        .width(800)
        .height(400)
        .dimension(decadeBar)
-       .group(numProjectsByDecade)
        .transitionDuration(500)
-       .x(d3.time.scale().domain([new Date("1960-1-1"), new Date("2016-1-1")]))
-       .xAxisLabel("Year")
+       .x(d3.scale.ordinal().domain(countries))
+       .xUnits(dc.units.ordinal)
+       .xAxisLabel("Countries")
        .y(d3.scale.linear().domain([30, 90]))
        .yAxisLabel("Average Life Expectancy")
-       .compose([dc.lineChart(decadeBarChart).group(numProjectsByDecade).colors(['#aa00ff']).valueAccessor(function(kv) { return kv.value.average }),
-           dc.lineChart(decadeBarChart).group(numProjectsByDecade).colors(['#00aaff']).valueAccessor(function(kv) { return kv.value.average })]);
+
+.compose([dc.barChart(decadeBarChart).group(numProjectsByDecadeM).colors(['#ff4d4d']).valueAccessor(function(kv)
+{ return kv.value.average }),
+dc.barChart(decadeBarChart).group(numProjectsByDecadeF).colors(['#990000']).valueAccessor(function(kv)
+{ return kv.value.average })]);
+
+   genderPieChart
+       .width(400)
+       .height(220)
+       .radius(90)
+       .innerRadius(40)
+       .transitionDuration(1500)
+       .dimension(genderPie)
+       .group(numProjectsByCountry)
+       .valueAccessor(function(p) { return p.value.count > 0 ?
+p.value.total / p.value.count : 0;
+       });
 
 
    dc.renderAll();

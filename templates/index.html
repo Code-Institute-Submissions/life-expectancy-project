@@ -9,19 +9,26 @@
   <link rel="stylesheet" href="{{ url_for ('static', filename='lib/css/dc.css')}}">
   <link rel="stylesheet" href="{{ url_for ('static', filename='css/custom.css')}}">
 </head>
-<body class="application">
-  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="./">Life Expectancy Around the World</a>
-      </div>
-    </div>
-  </div>
+<body>
+<nav class="navbar navbar-inverse">
+        <div class="nav-container">
+            <div class="navbar-header">
+                <a class="navbar-brand hidden-sm hidden-xs" href="#/">Life Expectancy Around The World</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
 
           <!-- Countries -->
-          <div class="col-sm-12">
-            <div class="chart-wrapper">
+          <div class="col-sm-6">
+            <!--<div class="chart-wrapper">-->
               <div class="chart-title">
                Countries
               </div>
@@ -37,7 +44,7 @@
 
           <!-- Gender Chart -->
           <div class="col-sm-6">
-            <div class="chart-wrapper">
+            <!--<div class="chart-wrapper">-->
               <div class="chart-title">
                 Chart by Gender
               </div>
@@ -47,10 +54,22 @@
             </div>
           </div>
           <!-- Gender Chart -->
+              <!-- menu select -->
+      <div class="col-sm-4">
+        <!--<div class="chart-wrapper">-->
+          <div class="chart-title">
+            Country
+          </div>
+          <div class="chart-stage">
+            <div id="countries-select"></div>
+          </div>
+        </div>
+      </div>
+      <!-- menu select -->
 
         <!-- Decade Bar -->
-          <div class="col-sm-6">
-            <div class="chart-wrapper">
+          <div class="col-sm-12">
+            <!--<div class="chart-wrapper">-->
               <div class="chart-title">
                 Chart by Decade
               </div>
@@ -61,26 +80,15 @@
           </div>
           <!-- Decade Bar -->
 
-      <!-- menu select -->
-      <div class="col-sm-3">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-            Country
-          </div>
-          <div class="chart-stage">
-            <div id="countries-select"></div>
-          </div>
-        </div>
-      </div>
-      <!-- menu select -->
+
               <!-- Gender Pie Chart -->
       <div class="col-sm-3">
-        <div class="chart-wrapper">
+        <!--<div class="chart-wrapper">-->
           <div class="chart-title">
             Gender Pie Chart
           </div>
           <div class="chart-stage">
-            <div id="gender-pie"></div>
+            <div id="gender-piechart"></div>
           </div>
         </div>
       </div>
