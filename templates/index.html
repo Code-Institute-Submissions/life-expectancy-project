@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html <html ng-app='LifeExpectancy'>
+>
 <head>
   <title>Life Expectancy Around the World</title>
   <link rel="stylesheet" href="{{ url_for ('static',
@@ -8,17 +9,24 @@
     filename='lib/css/keen-dashboards.css')}}">
   <link rel="stylesheet" href="{{ url_for ('static', filename='lib/css/dc.css')}}">
   <link rel="stylesheet" href="{{ url_for ('static', filename='css/custom.css')}}">
+    <link rel="stylesheet" href="{{url_for ('static', filename='lib/css/introjs.css')}}" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-inverse">
         <div class="nav-container">
             <div class="navbar-header">
-                <a class="navbar-brand hidden-sm hidden-xs" href="#/">Life Expectancy Around The World</a>
+                <a class="navbar-brand hidden-sm hidden-xs" href="#/">Life Expectancy Around The World from 1960 - 1915</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="/">Charts</a></li>
+                <li><a href="#" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.">About</a></li>
+                <li><button class="intro_button" type="button" style="background-color: #99c2ff" autofocus onclick="javascript:introJs().start();">Start Tour!</button>
+</li>
                     </ul>
                 </li>
             </ul>
@@ -27,12 +35,11 @@
 
 
           <!-- Countries -->
-          <div class="col-sm-6">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <!--<div class="chart-wrapper">-->
-              <div class="chart-title">
-               Countries
+              <div class="chart-title" >
               </div>
-              <div class="chart-stage">
+              <div class="chart-stage" data-step="1" data-intro="This Pie Chart has calculated the average life expectancy of each country from the period 1960 - 2016" style="font-weight: lighter" data-position="right">
                 <div id="country-chart"></div>
               </div>
             </div>
@@ -43,12 +50,12 @@
           <div class="row">
 
           <!-- Gender Chart -->
-          <div class="col-sm-6">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <!--<div class="chart-wrapper">-->
               <div class="chart-title">
-                Chart by Gender
               </div>
-              <div class="chart-stage">
+              <div class="chart-stage" data-step="2" data-intro="This composite chart presents average male and female life expectancies from the period 1960 - 2016" style="font-weight: normal" data-position="right"
+>
                 <div id="gender-chart"></div>
               </div>
             </div>
@@ -60,7 +67,8 @@
           <div class="chart-title">
             Country
           </div>
-          <div class="chart-stage">
+          <div class="chart-stage" data-step="3" data-intro="This drop down menu enables you to filter the other graphs by country" style="font-weight: normal" data-position="right"
+>
             <div id="countries-select"></div>
           </div>
         </div>
@@ -71,9 +79,9 @@
           <div class="col-sm-12">
             <!--<div class="chart-wrapper">-->
               <div class="chart-title">
-                Chart by Decade
               </div>
-              <div class="chart-stage">
+              <div class="chart-stage" data-step="4" data-intro="This bar chart shows per country the difference between male and female life expectancies on average" style="font-weight: normal" data-position="right"
+>
                 <div id="decade-bar"></div>
               </div>
             </div>
@@ -81,21 +89,6 @@
           <!-- Decade Bar -->
 
 
-              <!-- Gender Pie Chart -->
-      <div class="col-sm-3">
-        <!--<div class="chart-wrapper">-->
-          <div class="chart-title">
-            Gender Pie Chart
-          </div>
-          <div class="chart-stage">
-            <div id="gender-piechart"></div>
-          </div>
-        </div>
-      </div>
-      <!-- Gender Pie Chart -->
-
-    </div>
-  </div>
   <hr>
   <p class="small text-muted"> Data viz &#9829; from Claire Mitchell</p>
   <script src="{{ url_for ('static', filename='lib/js/jquery.min.js')}}"></script>
@@ -106,5 +99,19 @@
   <script src="{{ url_for ('static', filename='lib/js/queue.js')}}"></script>
   <script src="{{ url_for ('static', filename='lib/js/keen.min.js')}}"></script>
   <script src="{{ url_for ('static', filename='js/graph.js')}}"></script>
+    <script src="{{url_for ('static', filename='lib/js/intro.js')}}" type="text/javascript"></script>
+
+<script>
+
+$( function() {
+    $( document ).tooltip();
+  } );
+
+
+    /*$(".about").hover(function(){
+    $(this).css("background-color", "yellow");
+    });*/
+</script>
 </body>
+
 </html>

@@ -122,6 +122,7 @@ reduceRemoveF, reduceInitial);
    var decadeBarChart = dc.compositeChart("#decade-bar")
     var genderPieChart = dc.pieChart("#gender-piechart")
 
+
  selectField = dc.selectMenu('#countries-select')
        .dimension(totalCountries)
        .group(countryGroup);
@@ -139,8 +140,12 @@ reduceRemoveF, reduceInitial);
 p.value.total / p.value.count : 0;
        });
 
-   var colorScale = d3.scale.ordinal().range(['#ffffff', '#ffe6e6', '#ffcccc', '#ffb3b3', '#ff9999', '#ff8080', '#ff6666', '#ff4d4d', '#ff3333', '#ff1a1a', '#ff0000', '#e60000', '#cc0000'
-, '#b30000', '#990000', '#800000', '#660000', '#4d0000', '#330000', '#1a0000', '#000000']);
+ //  var colorScale = d3.scale.ordinal().range(['#ffffff', '#ffe6e6', '#ffcccc', '#ffb3b3', '#ff9999', '#ff8080', '#ff6666', '#ff4d4d', '#ff3333', '#ff1a1a', '#ff0000', '#e60000', '#cc0000'
+//, '#b30000', '#990000', '#800000', '#660000', '#4d0000', '#330000', '#1a0000', '#000000']);
+ //   countryPieChart.colors(colorScale);
+
+    var colorScale = d3.scale.ordinal().range(['#e6f0ff', '#cce0ff', '#b3d1ff', '#99c2ff', '#80b3ff', '#66a3ff', '#4d94ff', '#3385ff', '#1a75ff', '#0066ff', '#005ce6', '#0052cc', '#0047b3'
+, '#003d99', '#003380', '#002966', '#001f4d', '#001433', '#000a1a', '#000a1a', '#ffffff']);
     countryPieChart.colors(colorScale);
 
    genderCompositeChart
@@ -149,32 +154,46 @@ p.value.total / p.value.count : 0;
        .dimension(genderBar)
        .group(numProjectsByGenderF)
        .transitionDuration(500)
+                 .margins({ top: 40, left: 30, right: 10, bottom: 70 })
+
        .x(d3.time.scale().domain([new Date("1960-1-1"), new
 Date("2016-1-1")]))
        .xAxisLabel("Year")
        .y(d3.scale.linear().domain([30, 90]))
        .yAxisLabel("Average Life Expectancy")
 
-.compose([dc.lineChart(genderCompositeChart).group(numProjectsByGenderM).colors(['#ff4d4d']).valueAccessor(function(kv)
-{ return kv.value.average }),
+//.compose([dc.lineChart(genderCompositeChart).group(numProjectsByGenderM).colors(['#990000']).valueAccessor(function(kv)
+//{ return kv.value.average }).renderArea(true),
 
-dc.lineChart(genderCompositeChart).group(numProjectsByGenderF).colors(['#990000']).valueAccessor(function(kv)
-{ return kv.value.average })]);
+//dc.lineChart(genderCompositeChart).group(numProjectsByGenderF).colors(['#ff8080']).valueAccessor(function(kv)
+//{ return kv.value.average }).renderArea(true)]);
+
+   .compose([dc.lineChart(genderCompositeChart).group(numProjectsByGenderM).colors(['#99c2ff']).valueAccessor(function(kv)
+{ return kv.value.average }).renderArea(true),
+
+dc.lineChart(genderCompositeChart).group(numProjectsByGenderF).colors(['#001f4d']).valueAccessor(function(kv)
+{ return kv.value.average }).renderArea(true)]);
 
    decadeBarChart
        .width(800)
        .height(400)
        .dimension(decadeBar)
        .transitionDuration(500)
+          .margins({ top: 40, left: 30, right: 10, bottom: 70 })
        .x(d3.scale.ordinal().domain(countries))
        .xUnits(dc.units.ordinal)
        .xAxisLabel("Countries")
        .y(d3.scale.linear().domain([30, 90]))
        .yAxisLabel("Average Life Expectancy")
 
-.compose([dc.barChart(decadeBarChart).group(numProjectsByDecadeM).colors(['#ff4d4d']).valueAccessor(function(kv)
+//.compose([dc.barChart(decadeBarChart).group(numProjectsByDecadeM).colors(['#990000']).valueAccessor(function(kv)
+//{ return kv.value.average }),
+//dc.barChart(decadeBarChart).group(numProjectsByDecadeF).colors(['#ff8080']).valueAccessor(function(kv)
+//{ return kv.value.average })]);
+
+.compose([dc.barChart(decadeBarChart).group(numProjectsByDecadeM).colors(['#99c2ff']).valueAccessor(function(kv)
 { return kv.value.average }),
-dc.barChart(decadeBarChart).group(numProjectsByDecadeF).colors(['#990000']).valueAccessor(function(kv)
+dc.barChart(decadeBarChart).group(numProjectsByDecadeF).colors(['#001f4d']).valueAccessor(function(kv)
 { return kv.value.average })]);
 
    genderPieChart
