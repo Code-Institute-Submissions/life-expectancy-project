@@ -1,43 +1,92 @@
 # life-expectancy-project
 
-##Overview
+## Overview
 
-##Objectives
+### Objectives
 
-Build a static front-end website for a band or music group. Allow the user to be able to search for the band's commerical tracks and purchase from third-party sites. Create a mailing list and be able to subscribe to a newsletter. Publicise upcoming gigs and availability for bookings and costs. Create links to Facebook, Twitter and YouTube pages.
+This page intends to break down the average life expectancy of men and women around the world over a 55 year period. 
 
-##What does it do?
+### What does it do?
 
-This website allows those interested to interact with the band via a newsletter or availability form and book tickets to gigs (although it is only a front-end site). It offers information about the band and a range of social media links.
+The idea is that you are able to filter by each of the 39 countries in order to access male and female stats on life expectancy from 1960 - 2015. This then allows you to see more clearly how the average life expectancy was calculated and has changed from 1960 - 2015.
 
-##How does it work
+### How does it work
 
-This website uses Angular JS as a framework and is styled using Bootstrap.
+The data for this site was stored in MongoDB. This website uses Flask as a framework and is styled using CSS and Bootstrap. DC.js is then used to enable D3.js and Crossfilter.js to work together to manipulate the data and design graphics. The tour is created using intro.js. 
 
-##Tech Used
 
-###Some of the tech used includes:
+## Tech Used
 
-AngularJS handles routing and builds custom directives
-Bootstrap is used to create a responsive layout
-npm is used to install http-server
-bower is used to manage front-end components
-JavaScript is used for interactivity
-Testing
+### Some of the tech used includes:
 
-##Media
+- [Flask](http://flask.pocoo.org/)
+ handles routing in Python
+- [D3.js](https://d3js.org/)
+  is used for the visual side of data manipulation 
+- [Crossfilter.js](http://square.github.io/crossfilter/)
+  is used for filtering the data
+- [DC.js](https://dc-js.github.io/dc.js/)
+  is used alongside D3 and Crossfilter to create dynamic visualisations
+- [Bootstrap](http://getbootstrap.com/)
+ is used to create a responsive layout
+- [JavaScript](https://javascript.com/)
+ is used for interactivity
 
-###Getting the code up and running
+## Charts
 
-Firstly you will need to clone this repository by running the git clone <project's Github URL> command
-After you've that you'll need to make sure that you have npm and bower installed
-You can get npm by installing Node from here
-Once you've done this you'll need to run the following command: npm install -g bower # this may require sudo on Mac/Linux
-Once npm and bower are installed, you'll need to install all of the dependencies in package.json and bower.json
-npm install
+- Pie Chart displaying 39 countries and average life expectancy over 55 year period
+- Composite Chart with year on the x axis and average life expectancy on the y axis
+- Select chart in order to filter by country
+- Bar graph with countries on the x axis and average life expectancy on the y axis
 
-bower install
-After those dependencies have been installed you'll need to make sure that you have http-server installed. You can install this by running the following: npm install -g http-server # this also may require sudo on Mac/Linux
-Once http-server is installed run http-server
-The project will now run on localhost
-Make changes to the code and if you think it belongs in here then just submit a pull request
+## Functions
+
+These were the functions written in order to filter data separately for male and female ages and also for each country and year.
+
+function reduceAdd(p, v) {
+        ++p.count;
+        p.total += (v["male"] + v["female"]) / 2;
+        p.average = p.total / p.count;
+        return p;
+    }
+
+    function reduceRemove(p, v) {
+        --p.count;
+        p.total -= (v["male"] + v["female"]) / 2;
+        p.average = p.total / p.count;
+        return p;
+    }
+
+    function reduceInitial() {
+        return {count: 0, total: 0, average: 0};
+    }
+
+    function reduceAddM(p, v) {
+        ++p.count;
+        p.total += v["male"];
+        p.average = p.total / p.count;
+        return p;
+    }
+
+    function reduceRemoveM(p, v) {
+        --p.count;
+        p.total -= v["male"];
+        p.average = p.total / p.count;
+        return p;
+    }
+
+
+    function reduceAddF(p, v) {
+        ++p.count;
+        p.total += v["female"];
+        p.average = p.total / p.count;
+        return p;
+    }
+
+    function reduceRemoveF(p, v) {
+        --p.count;
+        p.total -= v["female"];
+        p.average = p.total / p.count;
+        return p;
+    }
+
