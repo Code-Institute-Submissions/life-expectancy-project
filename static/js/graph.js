@@ -105,13 +105,6 @@ reduceRemoveM, reduceInitial);
     var numProjectsByDecadeF = decadeBar.group().reduce(reduceAddF,
 reduceRemoveF, reduceInitial);
 
- //   var numProjectsByGenderM = genderPie.group().reduce(reduceAddM,
-  // reduceRemoveM, reduceInitial);
-
-    //var numProjectsByGenderF = genderPie.group().reduce(reduceAddF,
-    //reduceRemoveM, reduceInitial);
-
-
 
    var countryGroup = totalCountries.group();
 

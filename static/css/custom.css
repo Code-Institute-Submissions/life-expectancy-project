@@ -1,7 +1,7 @@
 body{
    margin: 20px;
    padding: 20px;
-   background-image: url("worldmap.png");
+  background-image: url("worldmap.png");
    background-color: darkslategrey;
 }
 
@@ -21,6 +21,7 @@ label {
    font-size: 20px;
 
 }
+
 
 .navbar-right{
     color: white;
