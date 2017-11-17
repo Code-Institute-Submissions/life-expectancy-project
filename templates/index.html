@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html <html ng-app='LifeExpectancy'>
->
+
 <head>
   <title>Life Expectancy Around the World</title>
   <link rel="stylesheet" href="{{ url_for ('static',
@@ -14,29 +14,43 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <link href="https://fonts.googleapis.com/css?family=raleway" rel="stylesheet">
+
 
 </head>
 <body>
 <nav class="navbar navbar-inverse">
         <div class="nav-container">
             <div class="navbar-header">
-                <a class="navbar-brand hidden-sm hidden-xs" href="#/">Life Expectancy Around The World from 1960 - 2015</a>
+                <a class="navbar-brand hidden-sm hidden-xs" href="#/"> Our world in data: Life expectancy from 1960 - 2015 </a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/">Charts</a></li>
-                <li><button onclick="myFunction()">About</button></li>
-                <p id="demo"></p>
-                <li><button class="intro_button" type="button" style="background-color: #99c2ff" autofocus onclick="javascript:introJs().start();">Start Tour!</button>
-</li>
+
+                 <!-- menu select -->
+         <li>
+        <!--<div class="chart-wrapper">-->
+
+          <div class="chart-stage" data-step="3" data-intro="This drop down menu enables you to filter the other graphs by country" style="font-weight: normal" data-position="right"
+>
+            <div id="countries-select"></div>
+          </div>
+         </li>
+
+
+      <!-- menu select -->
                     </ul>
                 </li>
             </ul>
         </div>
     </nav>
 
+                <button class="intro_button" type="button" style="background-color: #001f4d" autofocus onclick="javascript:introJs().start();">Start Tour!</button>
+
+
+          <div class="row">
 
           <!-- Countries -->
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 pie">
             <!--<div class="chart-wrapper">-->
               <div class="chart-title" >
               </div>
@@ -44,14 +58,10 @@
                 <div id="country-chart"></div>
               </div>
             </div>
-          </div>
-          </div>
           <!-- Countries -->
 
-          <div class="row">
-
-          <!-- Gender Chart -->
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+ <!-- Gender Chart -->
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 chart">
             <!--<div class="chart-wrapper">-->
               <div class="chart-title">
               </div>
@@ -60,37 +70,26 @@
                 <div id="gender-chart"></div>
               </div>
             </div>
-          </div>
+
           <!-- Gender Chart -->
-              <!-- menu select -->
-      <div class="col-sm-4">
-        <!--<div class="chart-wrapper">-->
-          <div class="chart-title">
-            Country
-          </div>
-          <div class="chart-stage" data-step="3" data-intro="This drop down menu enables you to filter the other graphs by country" style="font-weight: normal" data-position="right"
->
-            <div id="countries-select"></div>
-          </div>
-        </div>
-      </div>
-      <!-- menu select -->
 
         <!-- Decade Bar -->
-          <div class="col-sm-12">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bar">
             <!--<div class="chart-wrapper">-->
               <div class="chart-title">
               </div>
-              <div class="chart-stage" data-step="4" data-intro="This bar chart shows per country the difference between male and female life expectancies on average" style="font-weight: normal" data-position="right"
->
+              <div class="chart-stage" data-step="4" data-intro="This bar chart shows per country the difference between male and female life expectancies on average" style="font-weight: normal" data-position="right">
                 <div id="decade-bar"></div>
               </div>
             </div>
-          </div>
+
           <!-- Decade Bar -->
 
 
-  <hr>
+
+
+         </div>
+
   <p class="small text-muted"> Data viz &#9829; from Claire Mitchell</p>
   <script src="{{ url_for ('static', filename='lib/js/jquery.min.js')}}"></script>
   <script src="{{ url_for ('static', filename='lib/js/bootstrap.min.js')}}"></script>
