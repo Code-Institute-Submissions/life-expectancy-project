@@ -151,7 +151,7 @@ p.value.total / p.value.count : 0;
        .dimension(genderBar)
        .group(numProjectsByGenderF)
        .transitionDuration(500)
-                 .margins({ top: 40, left: 30, right: 10, bottom: 70 })
+                 .margins({ top: 40, left: 30, right: 10, bottom: 100 })
 
        .x(d3.time.scale().domain([new Date("1960-1-1"), new
 Date("2016-1-1")]))
@@ -185,7 +185,7 @@ dc.lineChart(genderCompositeChart).group(numProjectsByGenderF).colors(['#001f4d'
           .margins({ top: 40, left: 30, right: 10, bottom: 70 })
        .x(d3.scale.ordinal().domain(countries))
        .xUnits(dc.units.ordinal)
-       .xAxisLabel("Countries")
+       .xAxisLabel("Countries").colors(['white'])
        .y(d3.scale.linear().domain([30, 90]))
        .yAxisLabel("Average Life Expectancy")
 

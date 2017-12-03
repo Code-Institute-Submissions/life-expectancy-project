@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app='LifeExpectancy'>
+
+<head>
+  <title>Life Expectancy Around the World</title>
+  <link rel="stylesheet" href="{{ url_for ('static',
+    filename='lib/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{ url_for ('static',
+    filename='lib/css/keen-dashboards.css')}}">
+  <link rel="stylesheet" href="{{ url_for ('static', filename='lib/css/dc.css')}}">
+    <link rel="stylesheet" href="{{url_for ('static', filename='lib/css/introjs.css')}}" />
+      <link rel="stylesheet" href="{{ url_for ('static', filename='css/custom.css')}}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <link href="https://fonts.googleapis.com/css?family=raleway" rel="stylesheet">
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+        <div class="nav-container">
+            <div class="navbar-header">
+                <a class="navbar-brand hidden-sm hidden-xs" href="#/"> Our world in data: Life expectancy from 1960 - 2015 </a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+
+                 <!-- menu select -->
+                <li><a href="/">Home</a></li>
+         <li>
+        <!--<div class="chart-wrapper">-->
+
+          <div class="chart-stage" data-step="3" data-intro="This drop down menu enables you to filter the other graphs by country" style="font-weight: normal" data-position="right"
+>
+            <div id="countries-select"></div>
+          </div>
+         </li>
+
+
+      <!-- menu select -->
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<div class="gigs-img">
+    <p style="color: #2a6496; font-size: 20px; font-family: Helvetica, Arial, Verdana, sans-serif; font-weight: 100; text-align: center;">
+Life expectancy has increased rapidly since the Enlightenment. Estimates suggest that in a pre-modern, poor world, life expectancy was around 30 years in all regions of the world. In the early 19th century, life expectancy started to increase in the early industrialized countries while it stayed low in the rest of the world. This led to a very high inequality in how health was distributed across the world. Good health in the rich countries and persistently bad health in those countries that remained poor. Over the last decades this global inequality decreased. Countries that not long ago were suffering from bad health are catching up rapidly. Since 1900 the global average life expectancy has more than doubled and is now approaching 70 years. No country in the world has a lower life expectancy than the the countries with the highest life expectancy in 1800.
+
+
+
+
+
+
+</body>
+</html>

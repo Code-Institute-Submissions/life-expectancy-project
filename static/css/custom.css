@@ -1,16 +1,24 @@
 body{
    margin: 20px;
    padding: 20px;
-  background-image: url("yoal.jpg");
+  background-image: url("vita.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
     font-weight: 100;
 }
 
 label {
-    color: black;
+    color: white;
     display: inline-block;
     width: 5em;
   }
+
+.x-axis-label{
+    color: white;
+    z-index: 1000;
+    display: block;
+}
 
 .intro_button{
     color: white;
@@ -53,10 +61,11 @@ label {
 }
 
 .dc-chart g.row text {
-   fill: black;
+   fill: white;
    font-size: 12px;
-   color: black;
-   stroke: black;
+   color: white;
+    font-weight: 100
+   stroke: white;
 }
 
 
@@ -64,15 +73,16 @@ label {
 .x.axis text {
     text-anchor: end !important;
     transform: rotate(-45deg);
-   stroke: black;
+   stroke: white;
    font-weight: 100;
-    fill: black;
+    fill: white;
 
 }
 
 .y.axis text {
 
-   stroke: black;
+   stroke: white;
+    fill: white;
    font-weight: 100;
 
 
@@ -97,15 +107,67 @@ label {
 
 
 .pie{
+        border: 1px black solid;
+    background-color: black;
+    opacity: 0.8;
 
 
 }
 
 .bar{
+        border: 1px black solid;
+    background-color: black;
+    opacity: 0.8;
 
 
 }
 
 .chart{
 
+    border: 1px black solid;
+    background-color: black;
+    opacity: 0.8;
+
 }
+
+.introjs-helperNumberLayer{
+    display: none;
+}
+
+.introjs-tooltip{
+    color: #2a6496;
+    background-color: #001f4d;
+    font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+
+
+}
+.introjs-arrow bottom{
+    display: none;
+}
+.introjs-arrow top{
+    display: none;
+}
+.introjs-helperLayer{
+    display: none;
+}
+
+/*About*/
+
+ .gigs-img{
+    position: relative;
+    text-align: center;
+    color: black;
+     height: 1000px;
+   }
+   .img-text{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  width:100%;
+   font-size:15px;
+  font-weight: 200;
+   font-family: Quicksand, sans-serif;
+}
+
+

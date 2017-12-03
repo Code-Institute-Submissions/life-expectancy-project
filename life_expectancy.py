@@ -19,6 +19,12 @@ def index():
     """
     return render_template("index.html")
 
+@app.route("/about/")
+def about():
+    """
+    A Flask view to serve the main dashboard page.
+    """
+    return render_template("about.html")
 
 @app.route("/projecttwo/lifeexpectancy")
 def donor_projects():
