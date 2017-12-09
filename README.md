@@ -4,7 +4,7 @@
 
 ### Objectives
 
-To break down the average life expectancy of men and women around the world over a 55 year period. 
+To graphically display the average life expectancy of men and women around the world over a 55 year period. 
 
 ### What does it do?
 
