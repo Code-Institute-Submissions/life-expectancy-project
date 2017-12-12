@@ -11,7 +11,7 @@ You can see the life expectancy of men and women across 37 countries between 196
 
 ### How does it work
 
-The data for this site was stored in MongoDB. It uses Flask as a framework and is styled using CSS and Bootstrap. DC.js is then used to enable D3.js and Crossfilter.js to work together to manipulate the data and design graphics. The tour is created using intro.js.
+The data for this site was stored in MongoDB. It uses Flask as a framework and is styled using CSS and Bootstrap. DC.js is  used to enable D3.js and Crossfilter.js to work together to manipulate the data and design graphics. The tour is created using intro.js.
 
 ### Road Blocks
 
