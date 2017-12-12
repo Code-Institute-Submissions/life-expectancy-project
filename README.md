@@ -1,6 +1,5 @@
 # life-expectancy-project
 
-## Overview
 
 ### Objectives
 
@@ -8,11 +7,15 @@ To graphically display the average life expectancy of men and women around the w
 
 ### What does it do?
 
-You can see the life expectancy of men and women across 39 countries between 1960 - 2015. The four graphs interact with each other displaying how life expectancy has changed in this time period.
+You can see the life expectancy of men and women across 37 countries between 1960 - 2015. The four graphs interact with each other displaying how life expectancy has changed in this time period.
 
 ### How does it work
 
-The data for this site was stored in MongoDB. It uses Flask as a framework and is styled using CSS and Bootstrap. DC.js is then used to enable D3.js and Crossfilter.js to work together to manipulate the data and design graphics. The tour is created using intro.js. 
+The data for this site was stored in MongoDB. It uses Flask as a framework and is styled using CSS and Bootstrap. DC.js is then used to enable D3.js and Crossfilter.js to work together to manipulate the data and design graphics. The tour is created using intro.js.
+
+### Road Blocks
+
+When it came to labelling the x and y axis, an important part of identifying what each graph is showing, I ran up against a brick wall. Despite many attempts at various displays, z-index and colour changes, I was not able to solve the mystery in time. 
 
 
 ## Tech Used
