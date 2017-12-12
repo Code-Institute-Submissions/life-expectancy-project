@@ -14,6 +14,7 @@ function makeGraphs(error, lifeJSON) {
     var dateFormat = d3.time.format("%Y-%m-%d");
     lifeexpectancyproject.forEach(function (d) {
         d["year"] = dateFormat.parse(String(d["year"])+"-1-1");
+        console.log(d["year"]);
         d["year"].setDate(1);
         if (countries.indexOf(d["country"]) === -1) {
           countries.push(d["country"]);
