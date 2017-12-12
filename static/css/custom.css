@@ -20,6 +20,12 @@ label {
     display: block;
 }
 
+.y-axis-label{
+    color: white;
+    z-index: 1000;
+    display: block;
+}
+
 .intro_button{
     color: white;
     font-size: 20px;
@@ -64,7 +70,7 @@ label {
    fill: white;
    font-size: 12px;
    color: white;
-    font-weight: 100
+    font-weight: 100;
    stroke: white;
 }
 
