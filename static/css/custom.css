@@ -1,7 +1,7 @@
-body{
-   margin: 20px;
-   padding: 20px;
-  background-image: url("vita.jpg");
+body {
+    margin: 20px;
+    padding: 20px;
+    background-image: url("vita.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
@@ -12,54 +12,54 @@ label {
     color: white;
     display: inline-block;
     width: 5em;
-  }
+}
 
-.x-axis-label{
+.x-axis-label {
     color: white;
     z-index: 1000;
     display: block;
 }
 
-.y-axis-label{
+.y-axis-label {
     color: white;
     z-index: 1000;
     display: block;
 }
 
-.intro_button{
+.intro_button {
     color: white;
     font-size: 20px;
     font-weight: 100;
 }
 
-.navbar-header{
+.navbar-header {
     font-size: 90px;
     color: white;
     font-weight: 100;
 }
 
-.navbar-brand{
+.navbar-brand {
     font-size: 35px;
     color: white;
     font-weight: 100;
 
 }
 
-.navbar-nav{
-   background-color: transparent;
-   font-size: 30px;
+.navbar-nav {
+    background-color: transparent;
+    font-size: 30px;
     border: none;
     font-weight: 100;
 }
 
-.navbar{
-   background-color: transparent;
+.navbar {
+    background-color: transparent;
     border: none;
     padding: 50px;
 
 }
 
-.navbar-right{
+.navbar-right {
     color: white;
     font-size: 20px;
     font-weight: 100;
@@ -67,68 +67,63 @@ label {
 }
 
 .dc-chart g.row text {
-   fill: white;
-   font-size: 12px;
-   color: white;
+    fill: white;
+    font-size: 12px;
+    color: white;
     font-weight: 100;
-   stroke: white;
+    stroke: white;
 }
-
-
 
 .x.axis text {
     text-anchor: end !important;
     transform: rotate(-45deg);
-   stroke: white;
-   font-weight: 100;
+    stroke: white;
+    font-weight: 100;
     fill: white;
 
 }
 
 .y.axis text {
 
-   stroke: white;
+    stroke: white;
     fill: white;
-   font-weight: 100;
-
+    font-weight: 100;
 
 }
 
-.tick{
+.tick {
     color: white;
 }
+
 .dc-select-menu {
-   background: #001f4d;
-   width: 80%;
-   border: none;
-   position: relative;
-   height: 31px;
-   color: white;
-   vertical-align: middle;
-   text-align: center;
-   padding: 5px;
+    background: #001f4d;
+    width: 80%;
+    border: none;
+    position: relative;
+    height: 31px;
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+    padding: 5px;
     margin: 10px;
 
 }
 
-
-.pie{
-        border: 1px black solid;
+.pie {
+    border: 1px black solid;
     background-color: black;
     opacity: 0.8;
 
-
 }
 
-.bar{
-        border: 1px black solid;
+.bar {
+    border: 1px black solid;
     background-color: black;
     opacity: 0.8;
 
-
 }
 
-.chart{
+.chart {
 
     border: 1px black solid;
     background-color: black;
@@ -136,44 +131,47 @@ label {
 
 }
 
-.introjs-helperNumberLayer{
+.introjs-helperNumberLayer {
     display: none;
 }
 
-.introjs-tooltip{
+.introjs-tooltip {
     color: #2a6496;
     background-color: #001f4d;
     font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
 
+}
 
-}
-.introjs-arrow bottom{
+.introjs-arrow bottom {
     display: none;
 }
-.introjs-arrow top{
+
+.introjs-arrow top {
     display: none;
 }
-.introjs-helperLayer{
+
+.introjs-helperLayer {
     display: none;
 }
 
 /*About*/
 
- .gigs-img{
+.gigs-img {
     position: relative;
     text-align: center;
     color: black;
-     height: 1000px;
-   }
-   .img-text{
+    height: 1000px;
+}
+
+.img-text {
     position: absolute;
     top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
-  width:100%;
-   font-size:15px;
-  font-weight: 200;
-   font-family: Quicksand, sans-serif;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 200;
+    font-family: Quicksand, sans-serif;
 }
 
 
